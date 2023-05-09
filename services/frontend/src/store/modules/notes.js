@@ -30,6 +30,11 @@ const actions = {
   // eslint-disable-next-line no-empty-pattern
   async deleteNote({}, id) {
     await axios.delete(`note/${id}`);
+  },
+  async logout({commit}){
+    let note = null;
+    let notes = null;
+    commit('logout', [note, notes]);
   }
 };
 
@@ -40,6 +45,10 @@ const mutations = {
   setNote(state, note){
     state.note = note;
   },
+  logout(state, note, notes){
+    state.note = note;
+    state.notes = notes;
+  }
 };
 
 export default {

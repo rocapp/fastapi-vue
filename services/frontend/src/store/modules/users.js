@@ -30,6 +30,7 @@ const actions = {
     await axios.delete(`user/${id}`);
   },
   async logOut({commit}) {
+    localStorage.clear();
     let user = null;
     commit('logout', user);
   }

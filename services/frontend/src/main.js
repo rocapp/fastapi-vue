@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.js';
 import { createApp } from "vue";
 import axios from 'axios';
 
@@ -6,7 +7,15 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 
-const app = createApp(App);
+const app = createApp(App,
+  {
+    beforeCreate: async () => {
+      await store.dispatch('initialize_store');
+    },
+    beforeUnmount: async () => {
+      await localStorage.clear();
+    }
+  });
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = 'http://localhost:5000/';  // the FastAPI backend
